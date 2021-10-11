@@ -1,19 +1,12 @@
-import { useEffect } from 'react';
+import React from 'react';
 import './App.css';
-import test from './sqljs-test';
-
+import SqlView from './sqlview';
 
 function App() {
 
-  useEffect(() => {
-    test();
-  }, []);
-
   return (
     <div className="App">
-      <header className="App-header">
-        <p>sql.js test</p>
-      </header>
+      <SqlView />
     </div>
   );
 }

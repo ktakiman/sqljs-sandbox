@@ -1,0 +1,32 @@
+.sqlview {
+  header {
+    padding: 10px;
+    color: white;
+  }
+
+  input {
+    width: 90%;
+    color: white;
+    padding: 5px;
+  }
+
+  .query {
+    button {
+      padding: 2px;
+      margin-left: 5px;
+    }
+  }
+
+  table {
+    padding: 10px;
+    color: white;
+    font-size: 12px;
+
+    th { border-bottom: 1px solid white; }
+
+    td {
+      text-align: left;
+    }
+  }
+
+}
