@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { init, execQuery } from './sqljs-test';
+import { init, execQuery, testEmptyDb } from './sqljs-test';
 
 import './sqlview.scss';
 
@@ -22,7 +22,7 @@ const SqlView = () => {
   useEffect(() => {
     const tables = init();
     tables.then(data => {
-      console.log(data);
+      // console.log(data);
       setResult(data[0]);
     });
   }, []);
@@ -35,7 +35,9 @@ const SqlView = () => {
 
   return (
     <div className='code sqlview'>
-      <header>sql.js sandbox</header>
+      <div>
+        <button onClick={() => testEmptyDb()}>Empty Db Test</button>
+      </div>
       <div className='query'>
         <input value={query} onChange={e => setQuery(e.target.value)} />
         <button onClick={onQuery}>query</button>
