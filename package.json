@@ -14,9 +14,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm run copy-files && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "copy-files": "cp -t public node_modules/sql.js/dist/sql-wasm.wasm node_modules/sql.js/dist/sql-wasm.js"
   },
   "eslintConfig": {
     "extends": [

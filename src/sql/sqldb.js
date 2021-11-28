@@ -1,4 +1,4 @@
-import initSqlJs from 'sql.js';
+// import initSqlJs from 'sql.js';
 
 // 1) Create SQL object by calling initSqlJs
 // 2) Create database instance
@@ -7,10 +7,9 @@ import initSqlJs from 'sql.js';
 //    - query
 //    - update
 let SQL;
-let chinookDb = null;
 
 const init = async () => {
-  SQL = await initSqlJs({
+  SQL = await window.initSqlJs({
     locateFile: file => {
       // I got to specify the url to load the wasm file with this callback!!
       console.log(`locateFile: file = ${file}`);
@@ -21,22 +20,32 @@ const init = async () => {
   // console.log({ SQL });
   
   // chinook.db file is served from 'public' direcotry, where I just put a downloaded file
+  // const result = await chinookDb.exec('SELECT name FROM sqlite_master WHERE type="table" AND name NOT LIKE "sqlite_%"');
+  // return result;
+};
+
+const loadChinookDb = async () => {
   const dbData = await fetch('/chinook.db')
     .then(resp => resp.arrayBuffer())
     .then(buf => new Uint8Array(buf));
 
   // console.log({ dbData });
 
-  chinookDb = new SQL.Database(dbData);
-  const result = await chinookDb.exec('SELECT name FROM sqlite_master WHERE type="table" AND name NOT LIKE "sqlite_%"');
-  return result;
+  const chinookDb = new SQL.Database(dbData);
+  return chinookDb;
 };
 
-const execQuery = async query => {
-  const result = await chinookDb.exec(query);
-  return result;
+// const execQuery = async (db, query) => {
+//   const result = await db.exec(query);
+//   return result;
+// };
+
+const createEmptyDb = () => {
+  const db = new SQL.Database();
+  return db;
 };
 
+/*
 const testEmptyDb = async () => {
   const db = new SQL.Database();
 
@@ -65,6 +74,7 @@ const testEmptyDb = async () => {
   stmt.step();
   console.log(stmt.get());
 };
+*/
 
 
-export { init, execQuery, testEmptyDb };
+export { init, loadChinookDb, createEmptyDb };

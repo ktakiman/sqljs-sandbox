@@ -26,3 +26,6 @@ Session.vim
 
 *.db
 *.wasm
+*.zip
+
+/public/sql-wasm*
